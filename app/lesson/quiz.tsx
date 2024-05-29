@@ -5,6 +5,7 @@ import { Header } from "./header";
 import { useState } from "react";
 import { QuestionBubble } from "./question-bubble";
 import { Challenge } from "./challenge";
+import { Footer } from "./footer";
 
 type Props = {
     initialPercentage: number;
@@ -25,9 +26,46 @@ export const Quiz = ({initialHearts,initialLessonChallenges,initialLessonId,init
         const uncompletedIndex = challenges.findIndex((challenge)=> !challenge.completed);
         return uncompletedIndex === -1 ? 0 : uncompletedIndex ;
     });
+    // () indicates initial val is undefined
+    // <number> specifies expects val of number
+    const [selectedOption, setSelectedOption] = useState<number>();
+    // initial default is none
+    const [status,setStatus] = useState<"correct" | "wrong" | "none" >("none");
     // yo vaneko current challenge
-    const challenge = challenges[activeIndex];0
+    const challenge = challenges[activeIndex];
     const options = challenge?.challengeOptions ?? [];
+
+    const onNext = () => {
+        setActiveIndex((current) => current+1);
+    };
+
+    const onSelect = (id:number) => {
+        if(status !== "none") return;
+        setSelectedOption(id);
+    };
+   
+    const onContinue = () => {
+        if(!selectedOption) return;
+        if(status === "wrong"){
+            setStatus("none");
+            setSelectedOption(undefined);
+            return;
+        }
+        if(status === "correct"){
+            onNext();
+            setStatus("none");
+            setSelectedOption(undefined);
+            return;
+        }
+        const correctOption = options.find((option) => option.correct);
+
+        if(correctOption && correctOption.id === selectedOption){
+            console.log("Correct Option");
+        }else{
+            console.error("Incorrect option!");
+        }
+    }
+
     const title = challenge.type === "ASSIST" ? "Select the correct meaning" : challenge.question;
     return(
         <>
@@ -47,9 +85,9 @@ export const Quiz = ({initialHearts,initialLessonChallenges,initialLessonId,init
                             {challenge.type === "ASSIST" && (<QuestionBubble question={challenge.question}/>)};
                             <Challenge    
                                 options = {options}
-                                onSelect = {()=>{}}
-                                status = "none"
-                                selectedOption = {undefined}
+                                onSelect = {onSelect}
+                                status = {status}
+                                selectedOption = {selectedOption}
                                 disabled = {false}
                                 type = {challenge.type}
                             />
@@ -57,6 +95,11 @@ export const Quiz = ({initialHearts,initialLessonChallenges,initialLessonId,init
                     </div>
                 </div>
             </div>
+            <Footer 
+                disabled = {!selectedOption}
+                status = {status}
+                onCheck = {onContinue}
+            />
 
         </>
     )

@@ -105,7 +105,7 @@ const main = async () => {
                 challengeId:1,
                 text:"el hombre",
                 correct:true,
-                audioSrc:"es_man.mp3",
+                audioSrc:"/voice/es_man.mp3",
                 imageSrc:"/img/man.png"
             },
             {
@@ -114,7 +114,7 @@ const main = async () => {
                 challengeId:1,
                 text:"la mujer",
                 correct:false,
-                audioSrc:"es_women.mp3",
+                audioSrc:"/voice/es_women.mp3",
                 imageSrc:"/img/women.png"
             },
             {
@@ -123,7 +123,7 @@ const main = async () => {
                 challengeId:1,
                 text:"el robot",
                 correct:false,
-                audioSrc:"es_robot.mp3",
+                audioSrc:"/voice/es_robot.mp3",
                 imageSrc:"/img/robot.png"
             },
         ])

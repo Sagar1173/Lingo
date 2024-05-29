@@ -25,8 +25,8 @@ export const Challenge =({options,onSelect,status, selectedOption, disabled,type
                     id = {option.id}
                     text = {option.text}
                     imageSrc = {option.imageSrc}
-                    shortcut = {`$(i+1)`}
-                    selected = {selectedOption === option.id}
+                    shortcut = {`${i+1}`}
+                    selected = { selectedOption === option.id}
                     onClick = {()=> onSelect(option.id)}
                     status = {status}
                     audioSrc = {option.audioSrc}
