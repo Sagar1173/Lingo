@@ -17,6 +17,8 @@ const main = async () => {
         await db.delete( schema.challenges);
         await db.delete(schema.challengeOptions );
         await db.delete(schema.challengeProgress );
+        await db.delete(schema.userSubscription);
+
 
         await db.insert(schema.courses).values([
             {
@@ -96,11 +98,24 @@ const main = async () => {
                 type :"SELECT",
                 question : "Which one of these is the man?",
             },
+            {
+                id:2,
+                lessonId : 1,
+                order: 2,
+                type :"ASSIST",
+                question : "the man",
+            },
+            {
+                id:3,
+                lessonId:1,
+                order : 3,
+                type : "SELECT",
+                question: " Which one of these is the robot?",
+            }
         ])
 
         await db.insert(schema.challengeOptions).values([
             {
-                id: 1,
                 // title:"el hombre",
                 challengeId:1,
                 text:"el hombre",
@@ -109,7 +124,6 @@ const main = async () => {
                 imageSrc:"/img/man.png"
             },
             {
-                id: 2,
                 // title:"el hombre",
                 challengeId:1,
                 text:"la mujer",
@@ -118,7 +132,6 @@ const main = async () => {
                 imageSrc:"/img/women.png"
             },
             {
-                id: 3,
                 // title:"el hombre",
                 challengeId:1,
                 text:"el robot",
@@ -127,7 +140,82 @@ const main = async () => {
                 imageSrc:"/img/robot.png"
             },
         ])
-           
+
+        await db.insert(schema.challengeOptions).values([
+            {
+                // title:"el hombre",
+                challengeId:2,
+                text:"el hombre",
+                correct:true,
+                audioSrc:"/voice/es_man.mp3",
+            },
+            {
+                // title:"el hombre",
+                challengeId:2,
+                text:"la mujer",
+                correct:false,
+                audioSrc:"/voice/es_women.mp3",
+                
+            },
+            {
+                // title:"el hombre",
+                challengeId:2,
+                text:"el robot",
+                correct:false,
+                audioSrc:"/voice/es_robot.mp3",
+                
+            },
+        ])
+        await db.insert(schema.challengeOptions).values([
+            {
+                // title:"el hombre",
+                challengeId:3,
+                text:"el robot",
+                correct:false,
+                audioSrc:"/voice/es_robot.mp3",
+                imageSrc:"/img/man.png"
+            },
+            {
+                // title:"el hombre",
+                challengeId:3,
+                text:"la mujer",
+                correct:false,
+                audioSrc:"/voice/es_women.mp3",
+                imageSrc:"/img/women.png"
+            },
+            {
+                // title:"el hombre",
+                challengeId:3,
+                text:"el robot",
+                correct:true,
+                audioSrc:"/voice/es_robot.mp3",
+                imageSrc:"/img/robot.png"
+            },
+        ])
+        // verb wala part
+        await db.insert(schema.challenges).values([
+            {
+                id:4,
+                lessonId : 2,
+                order: 1,
+                type :"SELECT",
+                question : "Which one of these is the man?",
+            },
+            {
+                id:5,
+                lessonId : 2,
+                order: 2,
+                type :"ASSIST",
+                question : "the man",
+            },
+            {
+                id:6,
+                lessonId:2,
+                order : 3,
+                type : "SELECT",
+                question: " Which one of these is the robot?",
+            }
+        ])
 
         console.log("Seeding finished");
 

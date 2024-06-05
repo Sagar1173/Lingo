@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 type Props = {
     disabled? :boolean;
-    lessonId? : boolean;
+    lessonId? : number;
     status : "correct" | "wrong" | "none" | "completed";
     onCheck : () => void;
 }
@@ -43,7 +43,7 @@ export const Footer = ({disabled,lessonId,status,onCheck}:Props) => {
                         size={isMobile ? "sm" : "lg"}
                         onClick={()=> window.location.href = `/lesson/${lessonId}`}
                     >
-
+                        Practice Again
                     </Button>
 
                 )}
